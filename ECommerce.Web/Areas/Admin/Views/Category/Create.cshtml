@@ -1,0 +1,42 @@
+﻿@model Category
+
+<div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="card shadow border-0 w-100" style="max-width: 600px;">
+        <div class="card-header bg-dark text-white py-3 text-center">
+            <h2 class="m-0">Create Category</h2>
+        </div>
+        <div class="card-body p-4">
+            <form method="post" class="w-100">
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" class="form-control shadow-sm" />
+                    <label asp-for="Name"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="DisplayOrder" class="form-control shadow-sm" />
+                    <label asp-for="DisplayOrder"></label>
+                    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary w-100">Create</button>
+                    </div>
+                    <div class="col-6">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary w-100">
+                            Back To List
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+ 

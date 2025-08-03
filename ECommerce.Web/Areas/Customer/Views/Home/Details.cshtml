@@ -1,0 +1,105 @@
+﻿@model ShoppingCart
+
+<div class="container h-100 d-flex align-items-center justify-content-center py-4">
+    <div class="card shadow border-0 w-100" style="max-width: 1000px;">
+        <form method="post">
+            <input hidden asp-for="ProductId" />
+
+            <div class="card-header bg-dark text-white py-4 text-center">
+                <h3 class="text-uppercase mb-0">@Model.Product.Title</h3>
+                <p class="text-white-50 fw-semibold">by @Model.Product.Author</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="row mb-4">
+                    <div class="col-12 col-md-2 offset-md-1">
+                        <a asp-action="Index" class="btn btn-outline-primary bg-gradient fw-semibold w-100">
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-12 col-lg-4 text-center">
+                        @if (Model.Product.ProductImages != null && Model.Product.ProductImages.Count > 0)
+                        {
+                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                                <div class="carousel-indicators">
+                                    @foreach (var imageWithIndex in Model.Product.ProductImages
+                                                                    .Select((image, index) => new { ProductImage = image, Index = index }))
+                                    {
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                                data-bs-slide-to="@imageWithIndex.Index"
+                                                class="@(imageWithIndex.Index == 0 ? "active" : "")"
+                                                aria-current="@(imageWithIndex.Index == 0 ? "true" : null)"
+                                                aria-label="Slide @(imageWithIndex.Index + 1)">
+                                        </button>
+                                    }
+                                </div>
+                                <div class="carousel-inner">
+                                    @foreach (var imageWithIndex in Model.Product.ProductImages
+                                                                    .Select((image, index) => new { ProductImage = image, Index = index }))
+                                    {
+                                        <div class="@(imageWithIndex.Index == 0 ? "carousel-item active" : "carousel-item")">
+                                            <img class="d-block w-100" src="@imageWithIndex.ProductImage.ImageUrl" alt="Product Image">
+                                        </div>
+                                    }
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="col-12 col-lg-8">
+                        <div class="mb-3">
+                            <span class="badge bg-secondary">@Model.Product.Category.Name</span>
+                        </div>
+
+                        <h6 class="text-dark text-opacity-50">ISBN: @Model.Product.ISBN</h6>
+                        <h6 class="text-dark text-opacity-50 mb-3">
+                            List Price:
+                            <span class="text-decoration-line-through">@Model.Product.ListPrice.ToString("c")</span>
+                        </h6>
+
+                        <div class="row text-center mb-2">
+                            <div class="col fw-semibold text-dark text-opacity-50">Quantity</div>
+                            <div class="col fw-semibold text-dark text-opacity-50">1-50</div>
+                            <div class="col fw-semibold text-dark text-opacity-50">51-100</div>
+                            <div class="col fw-semibold text-dark text-opacity-50">100+</div>
+                        </div>
+                        <div class="row text-center mb-3">
+                            <div class="col text-warning fw-bold">Price</div>
+                            <div class="col text-warning fw-bold">@Model.Product.Price.ToString("c")</div>
+                            <div class="col text-warning fw-bold">@Model.Product.Price50.ToString("c")</div>
+                            <div class="col text-warning fw-bold">@Model.Product.Price100.ToString("c")</div>
+                        </div>
+
+                        <p class="text-secondary lh-sm mb-3">@Model.Product.Description</p>
+
+                        <div class="mb-3" style="max-width: 200px;">
+                            <div class="input-group">
+                                <span class="input-group-text bg-primary text-white fw-semibold">Count</span>
+                                <input asp-for="Count" type="number" value="1" class="form-control text-end" />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary bg-gradient w-100 py-2 fw-semibold text-uppercase">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

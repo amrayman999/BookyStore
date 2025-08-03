@@ -1,0 +1,16 @@
+﻿@model int
+
+<div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="card shadow border-0 w-100" style="max-width: 800px;">
+        <div class="card-header bg-dark text-white py-3 text-center">
+            <h2 class="m-0">Payment Successfull</h2>
+        </div>
+        <div class="card-body p-5 text-center">
+            <h3 class="text-success mb-4">Order Placed Successfully!</h3>
+            <p class="fs-5">Order Number: <strong>@Model</strong></p>
+            <img src="~/images/orderconfirm.png" class="img-fluid rounded my-4" style="max-width: 65%;" />
+            <p class="text-maroon fw-semibold">Payment Has Been Applied Successfully!</p>
+            <a asp-area="Admin" class="btn btn-primary" asp-controller="Order" asp-action="Details" asp-route-orderId="@Model">Back To Order Details </a>
+        </div>
+    </div>
+</div>

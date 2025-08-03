@@ -1,0 +1,67 @@
+﻿@model Company
+
+<div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="card shadow border-0 w-100" style="max-width: 700px;">
+        <div class="card-header bg-dark text-white py-3 text-center">
+            <h2 class="m-0">@(Model.Id != 0 ? "Update" : "Create") Company</h2>
+        </div>
+        <div class="card-body p-4">
+            <form method="post" enctype="multipart/form-data" class="w-100">
+                <input asp-for="Id" type="hidden" />
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" class="form-control shadow-sm" />
+                    <label asp-for="Name"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="StreetAddress" class="form-control shadow-sm" />
+                    <label asp-for="StreetAddress"></label>
+                    <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="City" class="form-control shadow-sm" />
+                    <label asp-for="City"></label>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="State" class="form-control shadow-sm" />
+                    <label asp-for="State"></label>
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="PhoneNumber" class="form-control shadow-sm" />
+                    <label asp-for="PhoneNumber"></label>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="PostalCode" class="form-control shadow-sm" />
+                    <label asp-for="PostalCode"></label>
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary w-100">
+                            @(Model.Id != 0 ? "Update" : "Create")
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <a asp-controller="Company" asp-action="Index" class="btn btn-outline-primary w-100">
+                            Back To List
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
